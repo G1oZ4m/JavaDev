@@ -64,26 +64,22 @@ public class CalculatorServer {
             os.close();
         }
     }
-    static class CalculatorHandler implements HttpHandler{
+    static class PostHandler implements HttpHandler {
         @Override
-        public void handle(HttpExchange exchange) throws IOException{
-            if("POST".equals(exchange.getRequestMethod())){
-                String request = new String(exchange.getRequestBody().readAllBytes());
-                double result = evaluateExpression(request);
+        public void handle(HttpExchange exchange) throws IOException {
+            // Обработка POST запроса
+            InputStream inputStream = exchange.getRequestBody();
+            String expression = new String(inputStream.readAllBytes());
+            double result = evaluateExpression(expression);
 
-                String response = String.valueOf(result);
-                exchange.sendResponseHeaders(200, response.getBytes().length);
-                OutputStream os = exchange.getResponseBody();
-                os.write(response.getBytes());
-                os.close();
-
-
-            }else{
-                exchange.sendResponseHeaders(405,-1);
-
-            }
+            String response = String.valueOf(result);
+            exchange.sendResponseHeaders(200, response.getBytes().length);
+            OutputStream os = exchange.getResponseBody();
+            os.write(response.getBytes());
+            os.close();
         }
 
+    }
         private double evaluateExpression(String expression) {
             try {
                 Object result = new ScriptEngineManager()
