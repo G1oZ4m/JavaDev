@@ -9,13 +9,16 @@ import java.net.InetSocketAddress;
 
 public class CalculatorServer {
     public static void main(String[] args) throws IOException {
-        HttpServer server = HttpServer.create(new InetSocketAddress(8000), 0);
 
-        server.createContext("/calculate", new CalculatorHandler());
+        // Simple HTTP server
+        HttpServer server = HttpServer.create(new InetSocketAddress(8001), 0);
+
+        server.createContext("/", new GetHandler());
+        server.createContext("/calculate", new PostHandler());
 
         server.setExecutor(null);
         server.start();
-        System.out.println("Server is started on http://localhost:8000/calculate");
+        System.out.println("Server is started on http://localhost:8001/calculate");
 
 
                 }
