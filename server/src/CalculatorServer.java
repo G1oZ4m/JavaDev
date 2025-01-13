@@ -26,6 +26,7 @@ public class CalculatorServer {
     static class GetHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
+            // Processing GET requests
             String htmlResponse = "<html lang ='en'" +
                     "<head>" +
                     "<meta charset=\"UTF-8\">" +
@@ -67,7 +68,7 @@ public class CalculatorServer {
     static class PostHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
-            // Обработка POST запроса
+            // Processing POST requests
             InputStream inputStream = exchange.getRequestBody();
             String expression = new String(inputStream.readAllBytes());
             double result = evaluateExpression(expression);
@@ -84,7 +85,7 @@ public class CalculatorServer {
         System.out.println("Received expression: " + expression);
 
         try {
-            // Используем ScriptEngine для выполнения выражений на JavaScript
+            // Using ScriptEngine for execution expressions on JavaScript
             Object result = new ScriptEngineManager()
                     .getEngineByName("JavaScript")
                     .eval(expression);
