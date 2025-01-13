@@ -80,18 +80,20 @@ public class CalculatorServer {
         }
 
     }
-        private double evaluateExpression(String expression) {
-            try {
-                Object result = new ScriptEngineManager()
-                        .getEngineByName("JavaScript")
-                        .eval(expression);
-                return result instanceof Number ? ((Number) result).doubleValue() : 0;
-            } catch (Exception e) {
-                System.err.println("Error in calculation: " + e.getMessage());
-                return 0;
+        private static double evaluateExpression(String expression) {
+        System.out.println("Received expression: " + expression);
 
-            }
+        try {
+            // Используем ScriptEngine для выполнения выражений на JavaScript
+            Object result = new ScriptEngineManager()
+                    .getEngineByName("JavaScript")
+                    .eval(expression);
+            return result instanceof Number ? ((Number) result).doubleValue() : 0;
 
+        } catch (Exception e) {
+            System.err.println("Error in calculation: " + e.getMessage());
+            return 0;
         }
+
     }
 }
