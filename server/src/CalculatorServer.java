@@ -11,7 +11,7 @@ public class CalculatorServer {
     public static void main(String[] args) throws IOException {
 
         // Simple HTTP server
-        HttpServer server = HttpServer.create(new InetSocketAddress(8001), 0);
+        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
         server.createContext("/", new GetHandler());
         server.createContext("/calculate", new PostHandler());
