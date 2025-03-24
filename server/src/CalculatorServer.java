@@ -18,7 +18,7 @@ public class CalculatorServer {
 
         server.setExecutor(null);
         server.start();
-        System.out.println("Server is started on http://localhost:8001/calculate");
+        System.out.println("Server is started on http://localhost:8080/calculate");
 
 
                 }
